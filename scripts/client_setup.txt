@@ -1,0 +1,13 @@
+chmod 0600 ~/.ssh/${KEY_NAME}
+eval `ssh-agent -s`
+ssh-add ~/.ssh/${KEY_NAME}
+for ip in ${CLIENT_IPS[@]}
+do
+    ssh -oStrictHostKeyChecking=no -i ~/.ssh/${KEY_NAME} ${USER}@${ip} << EOF
+        if [ -d "AStream" ]
+        then
+            rm -r AStream
+        fi
+        git clone https://github.com/abstractionAlpha/AStream.git
+EOF
+done
