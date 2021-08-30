@@ -1,0 +1,33 @@
+cd ~
+git clone https://github.com/openvswitch/ovs.git
+cd ovs
+git checkout v2.7.0
+./boot.sh
+./configure
+sudo make > /dev/null
+sudo make install > /dev/null
+sudo /usr/local/share/openvswitch/scripts/ovs-ctl start
+cd ~
+for tag in ${OVS_TAGS[@]}
+do
+    sudo ovs-vsctl add-br sw${tag}
+    sudo ovs-vsctl add-port sw${tag} p{tag}
+    sudo ovs-vsctl set-controller sw${tag} tcp:${CONTROLLER_IP}:${PORT_NUMBER}
+done
+cd ~
+apt-get -f install
+sudo apt install screen -y
+sudo apt install apache2 -y
+sudo apt install python-pip -y
+sudo apt install python-dev -y
+sudo apt install build-essential -y
+sudo apt install libssl-dev -y
+sudo apt install libffi-dev -y
+wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+sudo apt-get update
+sudo apt-get install mongodb-org-shell
+sudo apt install mongodb -y
+cd ~/SABR/
+git clone https://github.com/abstractionAlpha/cloudlab_SABR.git
+sudo python cloudlab_SABR/server/http_capture.py < /dev/null &> /dev/null &

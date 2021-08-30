@@ -1,0 +1,36 @@
+git clone http://github.com/noxrepo/pox   
+git clone https://github.com/abstractionAlpha/SABR.git   
+cd pox/pox   
+mkdir opennetmon   
+mkdir arima   
+cd opennetmon   
+git clone https://github.com/abstractionAlpha/SDN-OpenNetMon.git .   
+cd ..   
+cp ~/SABR/controllerSABR/arima.py ~/pox/ext/   
+cd ~   
+pip install pandas
+pip install pymongo   
+pip install matplotlib
+pip install scapy   
+pip install scapy_http   
+pip install statsmodels
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -   
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list   
+sudo apt-get update   
+sudo apt-get update -y   
+sudo apt-get install -y mongodb-org   
+sudo apt install -y apt-transport-https software-properties-common   
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9   
+sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/"   
+sudo apt install -y r-base   
+sudo apt-get install -y python-rpy2   
+sudo apt update   
+sudo add-apt-repository ppa:deadsnakes/ppa -y   
+sudo apt install python3.9 -y   
+sudo mv /usr/bin/python3.9 /usr/bin/python3   
+touch log.txt   
+touch opennetmon_out.txt   
+touch arima_out.txt   
+touch cacher_out.txt   
+nohup ./pox/pox.py openflow.of_01 --port=6653 log --file=log.txt,w opennetmon.startup < /dev/null &> opennetmon_out.txt &   
+nohup ./pox/pox.py openflow.of_01 --port=6653 log --file=log.txt,w arima < /dev/null &> arima_out.txt &

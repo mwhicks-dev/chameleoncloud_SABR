@@ -1,0 +1,20 @@
+sudo apt install python-pip -y
+sudo apt install python-dev -y
+sudo apt install build-essential -y
+sudo apt install vim -y
+sudo apt install screen -y
+sudo apt-get install python-scipy
+pip install urllib3
+pip install httplib2
+pip install pymongo
+pip install netifaces
+pip install requests
+pip install numpy
+pip install fabric3
+pip install scipy
+pip install sortedcontainers
+sudo mkdir /data
+sudo mkdir /data/db/
+sudo mongod &> /dev/null &
+cd ~/SABR
+git clone https://github.com/abstractionAlpha/AStream.git
