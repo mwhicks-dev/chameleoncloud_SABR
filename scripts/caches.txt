@@ -1,5 +1,5 @@
 chmod 0600 ~/.ssh/${KEY_NAME}
-for ip in ${CLIENT_IPS[@]}
+for ip in ${CACHE_IPS[@]}
 do
     ssh -oStrictHostKeyChecking=no -i ~/.ssh/${KEY_NAME} ${USER}@${ip} << EOF
         if ![ -d "/var/www/html/BBB" ]
