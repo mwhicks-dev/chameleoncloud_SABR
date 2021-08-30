@@ -3,9 +3,9 @@ for ip in ${CACHE_IPS[@]}
 do
     ssh -oStrictHostKeyChecking=no -i ~/.ssh/${KEY_NAME} ${USER}@${ip} << EOF
         sudo apt install apache2 -y > /dev/null
-        if [ ! -d "/var/www/html/BBB" ]
+        if [ ! -d "/var/www/html/Video_Store" ]
         then
-            sudo mkdir /var/www/html/BBB
+            sudo mkdir /var/www/html/Video_Store
         fi
 EOF
 done
