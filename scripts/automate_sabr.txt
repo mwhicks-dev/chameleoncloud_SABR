@@ -1,0 +1,7 @@
+cd ~/SABR
+python automate_sabr_clab.py << EOF
+${KEY_NAME}
+${CLIENT_IPS[@]}
+${CACHE_IPS[@]}
+${SERVER_IP[@]}
+EOF
